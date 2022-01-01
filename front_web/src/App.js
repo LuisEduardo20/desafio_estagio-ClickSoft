@@ -1,6 +1,16 @@
-import { Header, SearchArea, UserData, Title, SearchInput, SearchButton, UserName } from './styles';
+import {Header, 
+        SearchArea,
+        Main,
+        UserData,
+        UsuariosVisualizados, 
+        Title, 
+        // SmallTitle,
+        SearchInput, 
+        SearchButton, 
+        UserName, } from './styles';
 import { useState, useEffect } from 'react';
 import UserImage from './components/user_image/UserImage';
+import ListaVisualizados from './components/usuarios_visualizados/'
 import api from './Axios.js';
 
 function App() {
@@ -9,25 +19,29 @@ function App() {
   const [ userName, setUserName ] = useState();
   const [ inputText, setInputText ] = useState();
   const [ usuariosPesquisados, setUsuariosPesquisados ] = useState([]);
-
-  useEffect( () => {
-    api.get(`users/${userName}`)
-      .then( ({data}) => {
-        setGitHubData(data);
-        addUsuarioPesquisado(userName);
-      })
-  }, [userName])
+  // const [ lista1, setLista1 ] = useState([1, 2, 3, 4, 5, 6]);
 
   const searchUser = (userName) => {
     setUserName(userName);
     console.log(gitHubData)
   }
 
+
   const addUsuarioPesquisado = (name) => {
     const users = Array.from(usuariosPesquisados);
     users.push(name)
     setUsuariosPesquisados(users);
-  }
+  }    
+
+
+  useEffect( () => {
+    api.get(`users/${userName}`)
+    .then( ({data}) => {
+      setGitHubData(data);
+      addUsuarioPesquisado(userName);
+    })
+  }, [userName]);
+
 
   return (
     <div className="App">
@@ -49,8 +63,20 @@ function App() {
 
         </SearchArea>
       </Header>
-      
-      <UserData>
+
+      <Main>
+        
+        <UsuariosVisualizados>
+          {/* <SmallTitle>Visualizados</SmallTitle>
+          <ul>
+            {showUsuariosPesquisados}
+          </ul> */}
+          {/* <ListaVisualizados users={lista1} /> */}
+          <ListaVisualizados users={usuariosPesquisados} func={searchUser} />
+        </UsuariosVisualizados>
+
+        <UserData>
+        
         {gitHubData['avatar_url'] 
           ? 
             <UserImage url={gitHubData['avatar_url']} largura={200} /> 
@@ -80,8 +106,8 @@ function App() {
         }
       </UserData>
 
+      </Main>
       
-
     </div>
   );
 
