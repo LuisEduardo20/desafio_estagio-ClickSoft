@@ -4,7 +4,6 @@ import {Header,
         UserData,
         UsuariosVisualizados, 
         Title, 
-        // SmallTitle,
         SearchInput, 
         SearchButton, 
         UserName, } from './styles';
@@ -19,18 +18,19 @@ function App() {
   const [ userName, setUserName ] = useState();
   const [ inputText, setInputText ] = useState();
   const [ usuariosPesquisados, setUsuariosPesquisados ] = useState([]);
-  // const [ lista1, setLista1 ] = useState([1, 2, 3, 4, 5, 6]);
 
   const searchUser = (userName) => {
     setUserName(userName);
-    console.log(gitHubData)
+    // console.log(gitHubData)
   }
 
 
   const addUsuarioPesquisado = (name) => {
-    const users = Array.from(usuariosPesquisados);
-    users.push(name)
-    setUsuariosPesquisados(users);
+    if(!usuariosPesquisados.includes(name)) {
+      const users = Array.from(usuariosPesquisados);
+      users.push(name)
+      setUsuariosPesquisados(users);
+    }
   }    
 
 
@@ -67,11 +67,6 @@ function App() {
       <Main>
         
         <UsuariosVisualizados>
-          {/* <SmallTitle>Visualizados</SmallTitle>
-          <ul>
-            {showUsuariosPesquisados}
-          </ul> */}
-          {/* <ListaVisualizados users={lista1} /> */}
           <ListaVisualizados users={usuariosPesquisados} func={searchUser} />
         </UsuariosVisualizados>
 
