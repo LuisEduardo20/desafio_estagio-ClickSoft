@@ -18,7 +18,7 @@ export const SearchArea = styled.div `
 
 export const Main = styled.main `
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 50% 50%;
   grid-template-areas: 'views user';
 `;
 
