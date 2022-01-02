@@ -5,12 +5,12 @@ import {Header,
         UsuariosVisualizados, 
         Title, 
         SearchInput, 
-        SearchButton, 
-        UserName, } from './styles';
+        SearchButton, } from './styles';
 import { useState, useEffect } from 'react';
-import UserImage from './components/user_image/UserImage';
-import ListaVisualizados from './components/usuarios_visualizados/'
+import ListaVisualizados from './components/usuarios_visualizados';
+import UserInfo from './components/user_info';
 import api from './Axios.js';
+import UserModal from './views/modal_perfil';
 
 function App() {
 
@@ -18,11 +18,11 @@ function App() {
   const [ userName, setUserName ] = useState();
   const [ inputText, setInputText ] = useState();
   const [ usuariosPesquisados, setUsuariosPesquisados ] = useState([]);
+  const [ repos, setRepos ] = useState();
+  const [ modalVisible, setModalVisible ] = useState(false);
 
-  const searchUser = (userName) => {
-    setUserName(userName);
-    // console.log(gitHubData)
-  }
+  
+  const searchUser = (userName) => { setUserName(userName); }
 
 
   const addUsuarioPesquisado = (name) => {
@@ -36,11 +36,19 @@ function App() {
 
   useEffect( () => {
     api.get(`users/${userName}`)
-    .then( ({data}) => {
-      setGitHubData(data);
-      addUsuarioPesquisado(userName);
-    })
+      .then( ({data}) => {
+        setGitHubData(data);
+        addUsuarioPesquisado(userName);
+      })
+
+    api.get(`users/${userName}/repos`)
+      .then(({data}) => { setRepos(data); console.log(data) })
   }, [userName]);
+
+
+  useEffect( () => {
+
+  }, []);
 
 
   return (
@@ -49,9 +57,8 @@ function App() {
       <Header>
         <Title>Pesquisa de usuário</Title>
         <SearchArea>
-          
           <SearchInput onChange={ e => setInputText(e) } />
-        
+
           <SearchButton 
             onClick={ () => {
               const name = inputText.target.value;
@@ -60,47 +67,20 @@ function App() {
           }>
             Pesquisar usuário
           </SearchButton>
-
         </SearchArea>
       </Header>
 
       <Main>
-        
+        <UserModal gitHubData={gitHubData} repos={repos} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+
         <UsuariosVisualizados>
-          <ListaVisualizados users={usuariosPesquisados} func={searchUser} />
+          {/* <ListaVisualizados users={usuariosPesquisados} func={searchUser} /> */}
+          <ListaVisualizados users={gitHubData} func={searchUser} />
         </UsuariosVisualizados>
 
         <UserData>
-        
-        {gitHubData['avatar_url'] 
-          ? 
-            <UserImage url={gitHubData['avatar_url']} largura={200} /> 
-          :
-            ''
-        }
-
-        {gitHubData['name'] 
-          ? 
-            <UserName>Nome: {gitHubData['name']}</UserName>
-          :
-            ''
-        }
-
-        {gitHubData['login'] 
-          ? 
-            <UserName>Login: {gitHubData['login']}</UserName>
-          :
-            ''
-        }
-
-        {gitHubData['location'] 
-          ? 
-            <UserName>Localização: {gitHubData['location']}</UserName>
-          :
-            ''
-        }
-      </UserData>
-
+          <UserInfo gitHubData={gitHubData} modalVisible={modalVisible} setModalVisible={setModalVisible} />
+        </UserData>
       </Main>
       
     </div>
