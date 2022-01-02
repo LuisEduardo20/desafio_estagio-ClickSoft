@@ -1,10 +1,15 @@
-const ListaVisualizados = ({users, func}) => {
+import React from 'react';
+import { SmallTitle } from '../styles';
+import UserImage from '../user_image';
+
+const ListaVisualizados = (props) => {
   return (
     <>
-      <h3>Visualizados recentemente</h3>
-      { users.map( (user, index) => (
-          <li key={`item${index}`}>
-            <button onClick={() => {func(user)}}> {user} </button>
+      <SmallTitle>Visualizados recentemente</SmallTitle>
+      { props.users.map( (user, index) => (
+          <li key={`user${index}`}>
+            <UserImage url={user.image_url} largura={100} />
+            <button onClick={() => {props.func(user)}}> {user} </button>
           </li>
         ))}
     </>
