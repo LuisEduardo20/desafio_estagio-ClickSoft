@@ -1,35 +1,50 @@
 import React from 'react';
 
-import UserImage from '../user_image';
+// import UserImage from '../user_image';
 import { UserName } from '../../styles';
+import {UserImage,
+        UserContent,
+        ImageSession,
+        ContentSession, } from '../styles';
 
 const UserInfo = ({gitHubData, modalVisible, setModalVisible}) => {
+    const { avatar_url } = gitHubData; 
+
   return (
-    <>
-      {gitHubData['avatar_url'] 
-        ? 
-          <UserImage url={gitHubData['avatar_url']} largura={200} modalVisible={modalVisible} setModalVisible={setModalVisible} /> 
-        :
-          ''}
+    <UserContent>
+      <ImageSession>
+        {avatar_url 
+          ? 
+            <UserImage 
+              src={avatar_url} 
+              alt="Foto de perfil do GitHub do usuário"
+              onClick={() => { setModalVisible(!modalVisible) }}
+            />
+          :
+            ''}
+      </ImageSession>
+      <ContentSession>
 
-      {gitHubData['name'] 
-        ? 
-          <UserName>Nome: {gitHubData['name']}</UserName>
-        :
-          ''}
+        {gitHubData['name'] 
+          ? 
+            <UserName>Nome: {gitHubData['name']}</UserName>
+          :
+            ''}
 
-      {gitHubData['login'] 
-        ? 
-          <UserName>Login: {gitHubData['login']}</UserName>
-        :
-          ''}
+        {gitHubData['login'] 
+          ? 
+            <UserName>Login: {gitHubData['login']}</UserName>
+          :
+            ''}
 
-      {gitHubData['location'] 
-        ? 
-          <UserName>Localização: {gitHubData['location']}</UserName>
-        :
-          ''}
-    </>
+        {gitHubData['location'] 
+          ? 
+            <UserName>Localização: {gitHubData['location']}</UserName>
+          :
+            ''}
+      </ContentSession>
+
+    </UserContent>
   );
 }
 

@@ -1,17 +1,51 @@
 import React from 'react';
-import { SmallTitle } from '../styles';
-import UserImage from '../user_image';
+import {SmallTitle,
+        UserView,
+        UserPic,
+        UserData,
+        UsersList,
+        UserImage,
+        ListItem,
+        Button, } from '../styles';
 
 const ListaVisualizados = (props) => {
+  const { users, modalVisible, setModalVisible, setUserName } = props;
+
   return (
     <>
       <SmallTitle>Visualizados recentemente</SmallTitle>
-      { props.users.map( (user, index) => (
-          <li key={`user${index}`}>
-            <UserImage url={user.image_url} largura={100} />
-            <button onClick={() => {props.func(user)}}> {user} </button>
-          </li>
-        ))}
+
+      {users.map( (user, index) => {
+        return (
+          <UserView key={`user${index}`}>
+            <UserPic>
+                <UserImage 
+                  src={user.avatar_url} 
+                  alt="Foto de perfil do GitHub do usuário" 
+                  onClick={() => {
+                    setModalVisible(!modalVisible);
+                    setUserName(user.login);
+                  }}
+                />
+            </UserPic>
+
+            <UserData>
+              <UsersList>
+                <ListItem>
+                  <Button 
+                    text={user.name} 
+                    onClick={() => { setUserName(user.login); }
+                  }>
+                    {user.name}
+                  </Button>
+                </ListItem>
+                <ListItem>{user.login}</ListItem>
+                <ListItem>{user.location}</ListItem>
+              </UsersList>
+            </UserData>
+          </UserView>
+        );
+      })}
     </>
   );
 }
