@@ -49,6 +49,7 @@ function App() {
 
     api.get(`users/${userName}/repos`)
       .then(({data}) => { setRepos(data); })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userName]);
 
 
