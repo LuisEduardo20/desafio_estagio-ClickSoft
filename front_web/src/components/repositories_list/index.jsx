@@ -13,9 +13,6 @@ const ReposList = ({repos}) => {
                     <Divider></Divider>
                     <Link href={repo.html_url} target="_blank" rel="noreferrer">{repo.full_name}</Link>
                     <RepositorioList key={`repo${index}`}>
-                      {/* <RepositorioListItem>
-                        <a  href={repo.html_url} target="_blank" rel="noreferrer">{repo.full_name}</a>
-                      </RepositorioListItem> */}
 
                       <RepositorioListItem>
                         Linguagem utilizada: {repo.language}

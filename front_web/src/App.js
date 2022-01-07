@@ -18,7 +18,7 @@ function App() {
 
   const [ gitHubData, setGitHubData ] = useState([]);
   const [ userName, setUserName ] = useState();
-  const [ inputText, setInputText ] = useState();
+  const [ inputText, setInputText ] = useState(null);
   const [ usuariosPesquisados, setUsuariosPesquisados ] = useState([]);
   const [ nomesPesquisados, setNomesPesquisados ] = useState([]);
   const [ repos, setRepos ] = useState();
@@ -36,8 +36,9 @@ function App() {
       const users = [...usuariosPesquisados, data];
       setUsuariosPesquisados(users);
     }
-  }    
+  }
   
+
   
   useEffect( () => {
     api.get(`users/${userName}`)
@@ -49,6 +50,7 @@ function App() {
 
     api.get(`users/${userName}/repos`)
       .then(({data}) => { setRepos(data); })
+      .catch(() => window.alert('Usuário não encontrado'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userName]);
 
@@ -75,8 +77,13 @@ function App() {
             <SearchInput onChange={ e => setInputText(e) } placeholder="Ex: LuisEduardo20" />
             <SearchButton 
               onClick={ () => {
-                const name = inputText.target.value;
-                searchUser(name);
+                if(inputText){
+                  const name = inputText.target.value;
+                  searchUser(name);
+                }
+                else {
+                  window.alert('Preencha um nome no campo.')
+                }
               }
             }>
               Pesquisar
