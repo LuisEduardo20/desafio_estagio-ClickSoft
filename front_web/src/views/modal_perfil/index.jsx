@@ -12,6 +12,7 @@ import {ImageSession,
         ContentSession,
         CloseButton,
         UserImage, } from '../../components/styles';
+import GitHubIcon from '../../components/github_icon';
 
 const UserModal = ({gitHubData, repos, modalVisible, setModalVisible }) => {
   const { avatar_url,
@@ -38,8 +39,10 @@ const UserModal = ({gitHubData, repos, modalVisible, setModalVisible }) => {
               <Main>
 
                 <Header>
-                <img src="https://cdn.discordapp.com/attachments/914144800050143242/927737559210147890/icon_github.png" alt="Ícone do GitHub" />
+                  <GitHubIcon />
+
                   <SmallTitle>Perfil do usuário</SmallTitle>
+                  
                   <CloseButton onClick={() => setModalVisible(false)}>X</CloseButton>
                 </Header>
 

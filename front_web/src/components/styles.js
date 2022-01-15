@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const Button = styled.button `
-  width: 150px;
-  height: 36px;
+  width: 100%;
+  height: 40px;
   cursor: pointer;
   background-color: #9E4770;
   border: none;
@@ -38,7 +38,7 @@ export const SmallTitle = styled.h2 `
 `;
 
 export const UserView = styled.div `
-  width: 80%;
+  width: 85%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -46,6 +46,7 @@ export const UserView = styled.div `
   padding: 20px 0 20px 0;
   background-color: #959097;
   border-radius: 5px;
+  flex-wrap: wrap;
 
   @media(max-width: 768px) {
     width: 90%;
@@ -62,6 +63,7 @@ export const UserData = styled.div `
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 `;
 
 export const UserContent = styled.div `
@@ -110,13 +112,16 @@ export const UsersList = styled.ul `
   flex-direction: column;
   padding: 0;
   margin-left: 0;
+  padding-right: 20px;
 `;
 
 export const ListItem = styled.li `
+  width: 100%;
   text-align: left;
   margin-bottom: 5px;
+  padding-right: 5px;
   color: #FBFBFB;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 export const RepositorioList = styled.ul `

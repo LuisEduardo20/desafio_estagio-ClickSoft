@@ -5,14 +5,17 @@ export const Screen = styled.main `
   grid-template-columns: 30% 70%;
   grid-template-areas: 'visualizados main';
   
-  @media(max-width: 768px) {
+  @media (max-width: 768px) {
+    height: 100vh;
+    overflow: scroll-y;
     grid-template-columns: 1fr;
-    grid-template-rows: 50% 1fr;
+    grid-template-rows: 80% 20%;
     grid-template-areas: 
       'main'
       'visualizados'
     ;
   }
+
 `;
 
 export const UsuariosVisualizados = styled.aside `
@@ -24,14 +27,17 @@ export const UsuariosVisualizados = styled.aside `
   background-color: #2E2532;
   overflow-y: scroll;
   grid-area: visualizados;
+  
+  @media (max-width: 768px) {
+    height: 50vh;
+  }
+
 `;
 
 export const Main = styled.div `
-  /* display: flex;
-  flex-direction: column; */
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 15% 85% ;
+  grid-template-rows: 30% 70% ;
   grid-template-areas: 
     'header'
     'user'
@@ -58,12 +64,7 @@ export const Header = styled.header `
   }
 `;
 
-export const SearchArea = styled.div `
-  /* width: 100%; */
-  /* display: flex;
-  justify-content: left;
-  align-items: center; */
-`;
+export const SearchArea = styled.div ``;
 
 export const UserData = styled.section `
   display: flex;
@@ -94,6 +95,7 @@ export const UserName = styled.h3 `
   color: #2E2532;
   margin: 20px 0 20px 0;
 `;
+
 
 export const SearchInput = styled.input `
   width: 240px;

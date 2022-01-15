@@ -15,8 +15,8 @@ export const Modal = styled.div `
 `;
 
   export const Container = styled.div `
-  width: 70vw;
-  height: 60vh;
+  width: 80vw;
+  height: 90vh;
   background-color: #FBFBFB;
   display: flex;
   justify-content: center;

@@ -9,7 +9,7 @@ import {SmallTitle,
         Button, } from '../styles';
 
 const ListaVisualizados = (props) => {
-  const { users, modalVisible, setModalVisible, setUserName } = props;
+  const { users, modalVisible, setModalVisible, func } = props;
 
   return (
     <>
@@ -24,7 +24,7 @@ const ListaVisualizados = (props) => {
                   alt="Foto de perfil do GitHub do usuário" 
                   onClick={() => {
                     setModalVisible(!modalVisible);
-                    setUserName(user.login);
+                    func(user.login);
                   }}
                 />
             </UserPic>
@@ -34,7 +34,7 @@ const ListaVisualizados = (props) => {
                 <ListItem>
                   <Button 
                     text={user.name} 
-                    onClick={() => { setUserName(user.login); }
+                    onClick={() => { func(user.login); }
                   }>
                     {user.name}
                   </Button>
